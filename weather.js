@@ -12,6 +12,7 @@ $(document).ready(function() {
         console.log(cRequest)
         currDay();
         
+        
     });
     
     
@@ -35,11 +36,8 @@ $(document).ready(function() {
           url: queryURL,
           method: "GET"
         }).then(function(response) {
-          
-          console.log(response.name)
+                   
           let wData = response;
-          console.log(wData);
-
           let currObj ={};
           currObj.img = wData.weather[0].icon
           currObj.weather= wData.weather[0].description
@@ -64,6 +62,14 @@ $(document).ready(function() {
 
             }
             
+          }
+          showCity();
+          console.log(response)
+          function showCity(){
+            var city = response.name
+            var countryCode = response.sys.country
+            $("#cCity").text(city +"  "+ countryCode)
+            console.log(city)
           }
           
 
