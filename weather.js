@@ -11,6 +11,7 @@ $(document).ready(function() {
         cCity();
         console.log(cRequest)
         currDay();
+        forecast();
         
         
     });
@@ -71,6 +72,18 @@ $(document).ready(function() {
             $("#cCity").text(city +"  "+ countryCode)
             console.log(city)
           }
+          getDt()
+
+          function getDt(){
+            var tOffset = (response.timezone)/60
+            console.log(tOffset)
+            m1 = moment().utcOffset(tOffset)
+            $("#lclTime").text(m1.toString())
+
+        
+
+
+          }
           
 
 
@@ -78,6 +91,38 @@ $(document).ready(function() {
 
         });
       };
+
+
+
+      
+
+
+
+      
+
+      function forecast(){
+
+        var queryURL = `https://api.openweathermap.org/data/2.5/forecast?q=${cRequest}&units=imperial&appid=67f11922d4616f0141b883c13b7d07f7`;
+        $.ajax({
+          url: queryURL,
+          method: "GET"
+        }).then(function(response) {
+          
+          var days = response;
+          console.log(days)
+          m=moment()
+          m1 = moment().utcOffset(1)
+          console.log(m.toString())
+          console.log(m1.toString())
+          
+
+
+
+
+      })
+
+    }
+      
 
 
 
