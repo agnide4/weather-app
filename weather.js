@@ -120,48 +120,38 @@ $(document).ready(function() {
           console.log(m1.toString())
           m2 = m1.add(1,'d')
           console.log(m2.toString())
-          for (let i=0; i<5; i++){
-            m3 = m2.add(i,'d')
-            console.log(m3.toString())
-            if (m3.isSame(response.list[i].dt_txt)){
-            console.log(m3.toString());
+          
+          for (let i=7; i<41; i+=7){
+            var wCard = $("<card>");
+            var imgUrl = `http://openweathermap.org/img/wn/${response.list[i].weather[0].icon}@2x.png`
+            var img = $("<img>").attr("src", imgUrl)
+            var y = response.list[i].dt_txt
+            var date = $("<div>").text(moment(`${y}`, 'YYYY-MM-DD hh:mm:ss').format("dddd LL"))
+            var humidity = $("<div>").text("Humidity: " + response.list[i].main.humidty)
+            var temp = $("<div>").text("Temperature: " + response.list[i].main.temp)
+            wCard.append(img)
+            wCard.append(date)
+            wCard.append(humidity)
+            wCard.append(temp)
+            $("#fCard").append(wCard)
             
-            
-          }else {
-            console.log("Not here")
           }
-        }
+        })
+      
+        
 
           //Set number of forcast days starting from m1+1day
           //m=moment()
           //m1 = moment().utcOffset(1)
           //console.log(m.format("LL").toString())
-          //console.log(m1.toString())
+      }    //console.log(m1.toString())
           
 
 
 
 
-      })
-
-    }
       
 
-
-
-
-
-
-
-
-
-
-
-
     
-    
-    
-    
-
 })
 
