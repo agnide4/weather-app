@@ -78,9 +78,13 @@ $(document).ready(function() {
             var tOffset = (response.timezone)/60
             console.log(tOffset)
             m1 = moment().utcOffset(tOffset)
-            $("#lclTime").text(m1.toString())
-
-        
+            var date = $('<div id="date">').text(m1.format("[Today is] dddd LL"))
+            var time = $('<div id="date">').text(m1.format("[Current time is] LTS"))
+            $("#lclTime").empty();
+            //$("#lclTime").text(m1.toString())
+            $("#lclTime").append(date)
+            $("#lclTime").append(time)
+            
 
 
           }
@@ -110,10 +114,29 @@ $(document).ready(function() {
           
           var days = response;
           console.log(days)
-          m=moment()
-          m1 = moment().utcOffset(1)
-          console.log(m.toString())
+          var tOffset = (days.city.timezone)/60
+          console.log(tOffset)
+          m1 = moment().utcOffset(tOffset).startOf("day")
           console.log(m1.toString())
+          m2 = m1.add(1,'d')
+          console.log(m2.toString())
+          for (let i=0; i<5; i++){
+            m3 = m2.add(i,'d')
+            console.log(m3.toString())
+            if (m3.isSame(response.list[i].dt_txt)){
+            console.log(m3.toString());
+            
+            
+          }else {
+            console.log("Not here")
+          }
+        }
+
+          //Set number of forcast days starting from m1+1day
+          //m=moment()
+          //m1 = moment().utcOffset(1)
+          //console.log(m.format("LL").toString())
+          //console.log(m1.toString())
           
 
 
