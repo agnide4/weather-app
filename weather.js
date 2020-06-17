@@ -112,17 +112,10 @@ $(document).ready(function() {
           method: "GET"
         }).then(function(response) {
           
-          var days = response;
-          console.log(days)
-          var tOffset = (days.city.timezone)/60
-          console.log(tOffset)
-          m1 = moment().utcOffset(tOffset).startOf("day")
-          console.log(m1.toString())
-          m2 = m1.add(1,'d')
-          console.log(m2.toString())
+          
           
           for (let i=7; i<41; i+=7){
-            var wCard = $("<card>");
+            var wCard = $("<card class='wCard'>");
             var imgUrl = `http://openweathermap.org/img/wn/${response.list[i].weather[0].icon}@2x.png`
             var img = $("<img>").attr("src", imgUrl)
             var y = response.list[i].dt_txt

@@ -1,0 +1,17 @@
+.card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    
+}
+.wCard{
+    padding: 5px;
+    margin: 6px;
+    border-style: dashed;
+    text-align: center;
+}
+.card :hover {
+    box-shadow:10px 10px 5px grey;
+   
+    
+}
