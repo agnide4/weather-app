@@ -74,46 +74,51 @@ $(document).ready(function() {
             }).then(function(uvResponse){
               console.log(uvResponse)
               var uvData = $("<div>").text("UV Index: " + uvResponse.value)
-              uvData.attr("id",'vIndex')
+              uvData.attr({id:'vIndex', title:''})
+              
               $("#today").append(uvData)
               let uvColor = parseInt(uvResponse.value)
               console.log(uvColor)
               console.log(uvData)
               if (0 <= uvColor && uvColor <=2){
-                $("#vindex").css("background-color", "green")
+                $("#vIndex").css("color", "green")
                 $("#vIndex").tooltip({
                   content: "Low"
                 })}
                     else if (3 <= uvColor && uvColor <=5){
-                    $("#vindex").css( "color", "yellow")
+                    $("#vIndex").css( "color", "yellow")
                     $("#vIndex").tooltip({
-                    content: "Moderate"
+                    content: "Moderate",
+                    track:  true
 
                 })
               }else if (6 <= uvColor && uvColor <=7){
-                $("#vindex").css( "color", "orange")
-                /*$("#vIndex").tooltip({
-                  content: "High"
+                $("#vIndex").css( "color", "orange")
+                $("#vIndex").tooltip({
+                  content: "High",
+                  track:  true
 
-              })*/
+              })
 
 
               }else if (uvColor >=8  && uvColor <=10){
-                $("#vindex").css("background-color", "red")
+                $("#vIndex").css("color", "red")
                 console.log("here")
-                /*$("#vIndex").tooltip({
-                  content: "Very High"
+                $("#vIndex").tooltip({
+                  content: "Very High",
+                  track:  true
 
-              })*/
+              })
 
 
               } else{
-                $("#vindex").css("background-color", "violet")
-                console.log("11")
-                /*$("#vIndex").tooltip({
-                  content: "Extreme"
+                $("#vIndex").css("color", "violet")
+                
+                $("#vIndex").tooltip({
+                  content: "Extreme",
+                  track:  true
 
-              })*/
+              })
               }
 
 
@@ -136,7 +141,6 @@ $(document).ready(function() {
             var date = $('<div id="date">').text(m1.format("[Today is] dddd LL"))
             var time = $('<div id="date">').text(m1.format("[Current time is] LTS"))
             $("#lclTime").empty();
-            //$("#lclTime").text(m1.toString())
             $("#lclTime").append(date)
             $("#lclTime").append(time)
             
