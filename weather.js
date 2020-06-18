@@ -120,7 +120,7 @@ $(document).ready(function() {
             var img = $("<img>").attr("src", imgUrl)
             var y = response.list[i].dt_txt
             var date = $("<div>").text(moment(`${y}`, 'YYYY-MM-DD hh:mm:ss').format("dddd LL"))
-            var humidity = $("<div>").text("Humidity: " + response.list[i].main.humidty)
+            var humidity = $("<div>").text("Humidity: " + response.list[i].main.humidity)
             var temp = $("<div>").text("Temperature: " + response.list[i].main.temp)
             wCard.append(img)
             wCard.append(date)
