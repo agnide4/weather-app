@@ -35,9 +35,18 @@ $(document).ready(function() {
         var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${cRequest}&units=imperial&appid=67f11922d4616f0141b883c13b7d07f7`;
         $.ajax({
           url: queryURL,
-          method: "GET"
+          method: "GET",
+        }).fail(function(err){
+          if (err.status == 404){
+            console.log('Please input a valid city')
+            $("#wrong-city").addClass("is-active")
+            return
+          }else {
+            console.log("Oops something went wrong")
+          }
+          
         }).then(function(response) {
-                   
+          console.log(response)         
           let wData = response;
           let currObj ={};
           currObj.img = wData.weather[0].icon
@@ -123,7 +132,8 @@ $(document).ready(function() {
 
 
 
-            }) 
+            })
+             
           }
           showCity();
           function showCity(){
@@ -144,19 +154,13 @@ $(document).ready(function() {
             $("#lclTime").append(date)
             $("#lclTime").append(time)
             
-
-
           }
-          
-
-
-
-
         });
       };
 
 
 
+      
       
 
 
