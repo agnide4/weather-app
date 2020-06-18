@@ -3,7 +3,22 @@
     flex-direction: row;
     justify-content: space-around;
     
+    
 }
+
+.tile {
+    background-color: skyblue;
+}
+
+.box {
+    text-transform: uppercase;
+}
+
+#lclTime {
+    font-size: 35px;
+    text-align: center;
+}
+
 .wCard{
     padding: 5px;
     margin: 6px;
@@ -11,8 +26,8 @@
     text-align: center;
 }
 
-.card :hover {
-    display: block;
+.wCard:hover {
+ 
     box-shadow:10px 10px 5px grey;
     
 }

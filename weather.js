@@ -64,8 +64,63 @@ $(document).ready(function() {
             }
             
           }
+
+          uvIndex()
+          function uvIndex(){
+            var uvUrl = `http://api.openweathermap.org/data/2.5/uvi?appid=67f11922d4616f0141b883c13b7d07f7&lat=${response.coord.lat}&lon=${response.coord.lon}`
+            $.ajax({
+              url: uvUrl,
+              method: "GET"
+            }).then(function(uvResponse){
+              console.log(uvResponse)
+              var uvData = $("<div>").text("UV Index: " + uvResponse.value)
+              uvData.attr("id",'vIndex')
+              $("#today").append(uvData)
+              let uvColor = parseInt(uvResponse.value)
+              console.log(uvColor)
+              console.log(uvData)
+              if (0 <= uvColor && uvColor <=2){
+                $("#vindex").css("background-color", "green")
+                $("#vIndex").tooltip({
+                  content: "Low"
+                })}
+                    else if (3 <= uvColor && uvColor <=5){
+                    $("#vindex").css( "color", "yellow")
+                    $("#vIndex").tooltip({
+                    content: "Moderate"
+
+                })
+              }else if (6 <= uvColor && uvColor <=7){
+                $("#vindex").css( "color", "orange")
+                /*$("#vIndex").tooltip({
+                  content: "High"
+
+              })*/
+
+
+              }else if (uvColor >=8  && uvColor <=10){
+                $("#vindex").css("background-color", "red")
+                console.log("here")
+                /*$("#vIndex").tooltip({
+                  content: "Very High"
+
+              })*/
+
+
+              } else{
+                $("#vindex").css("background-color", "violet")
+                console.log("11")
+                /*$("#vIndex").tooltip({
+                  content: "Extreme"
+
+              })*/
+              }
+
+
+
+            }) 
+          }
           showCity();
-          console.log(response)
           function showCity(){
             var city = response.name
             var countryCode = response.sys.country
@@ -113,8 +168,9 @@ $(document).ready(function() {
         }).then(function(response) {
           
           
-          
-          for (let i=7; i<41; i+=7){
+          $("#fCard").empty()
+          for (let i=7; i<41; i+=8){
+            
             var wCard = $("<card class='wCard'>");
             var imgUrl = `http://openweathermap.org/img/wn/${response.list[i].weather[0].icon}@2x.png`
             var img = $("<img>").attr("src", imgUrl)
