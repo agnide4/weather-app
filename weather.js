@@ -6,12 +6,18 @@ const apiKey = "67f11922d4616f0141b883c13b7d07f7";
 //https://api.openweathermap.org/data/2.5/weather?q={city name},{state code},{country code}&units=imperial&appid={your api key}
 
 $(document).ready(function() {
+  
+
+
+
+
     sButton.on("click",function(){
         getInput();
         cCity();
         console.log(cRequest)
         currDay();
         forecast();
+       
         
         
     });
@@ -74,6 +80,7 @@ $(document).ready(function() {
             
           }
 
+          //function to get Uvindex  
           uvIndex()
           function uvIndex(){
             var uvUrl = `http://api.openweathermap.org/data/2.5/uvi?appid=67f11922d4616f0141b883c13b7d07f7&lat=${response.coord.lat}&lon=${response.coord.lon}`
@@ -135,13 +142,18 @@ $(document).ready(function() {
             })
              
           }
+
+          //function to diplay searched city and country code in upper right corner
           showCity();
           function showCity(){
             var city = response.name
             var countryCode = response.sys.country
             $("#cCity").text(city +"  "+ countryCode)
-            console.log(city)
+            sCities(city,countryCode);
+            
           }
+
+          //function to get date and time in searched city
           getDt()
 
           function getDt(){
@@ -202,6 +214,94 @@ $(document).ready(function() {
           //m1 = moment().utcOffset(1)
           //console.log(m.format("LL").toString())
       }    //console.log(m1.toString())
+
+
+      //Close modal on Click function
+      function closemodal(){
+        $(".modal-close").on('click', function(){
+          $("#wrong-city").removeClass("is-active")
+  
+        })
+
+      }
+      
+
+      //function to check local storage and display previous cities
+      pCities()
+      function pCities(){
+        var pcities = JSON.parse(localStorage.getItem(("cities"))) || []
+        if (pcities.length == 0){
+          $("#wrong-city").addClass("is-active")
+          $("modal-message").text("<h1>MUST BE YOUR YOUR FIRST TIME IN HERE. WE APPRECIATE THE VISIT. PLEASE ENTER A CITY BELOW</h1>")
+          closemodal()
+          return
+
+        }else {
+          $("#sCities").empty();
+          for (let i=0; i<pcities.length; i++){
+              var cities = $("<div>").text(pcities[i].cName, pcities[i].cCode);
+              
+              $("#sCities").append(cities)   
+           
+          }
+        }
+        cRequest = pcities[pcities.length-1].cName;
+        currDay()
+      }
+
+      //Function to store searched cities to local storage
+      function sCities(a,b){
+        var pcitiesObj = localStorage.getItem('cities')
+        var pcities = JSON.parse(pcitiesObj) || []
+        
+            if (pcities.length < 10){
+              var searchedCity = {
+              cName: a,
+              cCode: b
+            };
+            for (let i=0; i<pcities.length; i++){
+              var previous = pcities[i].cName.indexOf(searchedCity.cName)
+              console.log(previous)
+              if (previous != -1){
+                pcities.splice(previous,1)
+              }
+            }
+            pcities.push(searchedCity)
+            localStorage.setItem('cities', JSON.stringify(pcities))
+            pcities = JSON.parse(localStorage.getItem(("cities")))
+          }else {
+            var searchedCity = {
+              cName: a,
+              cCode: b
+            };
+            for (let i=0; i<pcities.length; i++){
+              var previous = pcities[i].cName.indexOf(searchedCity.cName)
+              console.log(previous)
+              if (previous != -1){
+                pcities.splice(previous,1)
+              }
+            }
+              
+            console.log(pcities)
+            pcities.shift()
+            pcities.push(searchedCity)
+            localStorage.setItem('cities', JSON.stringify(pcities))
+
+
+          }
+
+          pcities = JSON.parse(localStorage.getItem(("cities")))
+          $("#sCities").empty();
+          for (let i=0; i<pcities.length; i++){
+          var cities = $("<div>").text(pcities[i].cName, pcities[i].cCode);
+          $("#sCities").append(cities)   
+           
+          }
+
+
+      }
+
+
           
 
 
