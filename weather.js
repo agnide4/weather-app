@@ -259,6 +259,14 @@ $(document).ready(function() {
               cName: a,
               cCode: b
             };
+
+            //while (i<pcities.length && previous != -1){
+            //  var previous = pcities[i].cName.indexOf(searchedCity.cName)
+            //  pcities.splice(previous,1)
+            // i++
+
+            //}
+            
             for (let i=0; i<pcities.length; i++){
               var previous = pcities[i].cName.indexOf(searchedCity.cName)
               console.log(previous)
