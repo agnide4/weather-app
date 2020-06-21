@@ -255,40 +255,43 @@ $(document).ready(function() {
         var pcities = JSON.parse(pcitiesObj) || []
         
             if (pcities.length < 10){
-              var searchedCity = {
+              const searchedCity = {
               cName: a,
               cCode: b
             };
-
-            //while (i<pcities.length && previous != -1){
-            //  var previous = pcities[i].cName.indexOf(searchedCity.cName)
-            //  pcities.splice(previous,1)
-            // i++
-
-            //}
-            
-            for (let i=0; i<pcities.length; i++){
-              var previous = pcities[i].cName.indexOf(searchedCity.cName)
-              console.log(previous)
-              if (previous != -1){
-                pcities.splice(previous,1)
+            let previous;
+            if (pcities.length>0) {              
+              for (let i=0; i<pcities.length; i++){
+                previous = pcities[i].cName.indexOf(searchedCity.cName)
+                console.log(previous)
+                      if (previous!== -1){
+                      console.log(pcities)  
+                      pcities.splice(i,1)
+                    }
               }
             }
+             
             pcities.push(searchedCity)
+            console.log(pcities)
             localStorage.setItem('cities', JSON.stringify(pcities))
             pcities = JSON.parse(localStorage.getItem(("cities")))
           }else {
-            var searchedCity = {
+            const searchedCity = {
               cName: a,
               cCode: b
             };
+
             for (let i=0; i<pcities.length; i++){
-              var previous = pcities[i].cName.indexOf(searchedCity.cName)
+              previous = pcities[i].cName.indexOf(searchedCity.cName)
               console.log(previous)
-              if (previous != -1){
-                pcities.splice(previous,1)
-              }
+                  if (previous !== -1){
+                    console.log(previous)
+                    pcities.splice(i,1)
+                  }
+
             }
+
+
               
             console.log(pcities)
             pcities.shift()
