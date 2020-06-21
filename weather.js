@@ -274,7 +274,7 @@ $(document).ready(function() {
             pcities.push(searchedCity)
             console.log(pcities)
             localStorage.setItem('cities', JSON.stringify(pcities))
-            pcities = JSON.parse(localStorage.getItem(("cities")))
+            //pcities = JSON.parse(localStorage.getItem(("cities")))
           }else {
             const searchedCity = {
               cName: a,
@@ -304,13 +304,27 @@ $(document).ready(function() {
           pcities = JSON.parse(localStorage.getItem(("cities")))
           $("#sCities").empty();
           for (let i=0; i<pcities.length; i++){
-          var cities = $("<div>").text(pcities[i].cName, pcities[i].cCode);
+          var cities = $("<div>").text(pcities[i].cName);
+          cities.addClass("pastCities")
           $("#sCities").append(cities)   
            
           }
 
-
+          
       }
+      
+
+
+      clickWeather()
+
+      function clickWeather(){
+      $(".pastCities").on('click', function(){
+        let i;
+         past = this.innerHTML;
+
+         console.log(past)
+      })
+    }
 
 
           
