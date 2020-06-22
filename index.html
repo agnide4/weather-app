@@ -17,7 +17,13 @@
     <div class="modal" id="wrong-city">
         <div class="modal-background"></div>
         <div class="modal-content">
-          <h1 id="modal-message">PLEASE ENTER A VALID CITY</h1>>
+            <div class="field">
+                <h1 id="modal-message">PLEASE ENTER A VALID CITY</h1>
+            <div class="contol">
+                <input class="input" type="text" id="mInput" placeholder="What is the weather in">
+                <button type="Submit" id="mButton">SUBMIT</button>
+            </div>               
+        </div> 
         </div>
         <button class="modal-close is-large" aria-label="close"></button>
       </div>
@@ -48,7 +54,7 @@
         <div class="tile is-ancestor">
             <div class="tile is-3 is-parent">
                 <div class="tile is-child box">
-                    <h2 class="is-large pastCities" id="sCities">PREVIOUSLY SEARCHED CITIES</h2>
+                    <h2 class="is-large " id="sCities">PREVIOUSLY SEARCHED CITIES</h2>
                 </div>
             </div>
             <div class="tile is-5 is-parent">
