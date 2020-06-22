@@ -77,7 +77,9 @@ $(document).ready(function () {
         
       uvIndex()
       function uvIndex() {
-        var uvUrl = `http://api.openweathermap.org/data/2.5/uvi?appid=67f11922d4616f0141b883c13b7d07f7&lat=${response.coord.lat}&lon=${response.coord.lon}`
+        var lat = response.coord.lat;
+        var lon = response.coord.lon;
+        var uvUrl = `http://api.openweathermap.org/data/2.5/uvi?appid=67f11922d4616f0141b883c13b7d07f7&lat=${lat}&lon=${lon}`
         $.ajax({
           url: uvUrl,
           method: "GET"
@@ -171,7 +173,6 @@ $(document).ready(function () {
           $("#wrong-city").removeClass("is-active")
           let city = $("#mInput").val();
           cRequest = city;
-          console.log(cRequest)
           $("#today").empty();
           currDay();
           
@@ -185,6 +186,7 @@ $(document).ready(function () {
       } else {
         $("#wrong-city").addClass("is-active")
         $("#modal-message").text("OOPS SOMETHING WENT WRONG, PLEASE TRY AGAIN LATER")
+        $("oops").hide()
         closemodal();
         
         
@@ -257,13 +259,11 @@ $(document).ready(function () {
       $("#wrong-city").addClass("is-active")
       $("#modal-message").text("MUST BE YOUR YOUR FIRST TIME IN HERE. WE APPRECIATE THE VISIT")
       $("#mButton").on("click", function(){
-        $("#today").empty();
         $("#wrong-city").removeClass("is-active")
-        let city = $("#mInput").val();
-        localStorage.setItem("City", city)
-        cCity();
-        console.log(cRequest)
-        currDay();
+          let city = $("#mInput").val();
+          cRequest = city;
+          $("#today").empty();
+          currDay();
         
 
       })
@@ -280,6 +280,7 @@ $(document).ready(function () {
     }
     cRequest = pcities[pcities.length - 1].cName;
     currDay()
+    forecast()
   }
 
   //Function to store searched cities to local storage

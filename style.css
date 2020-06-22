@@ -32,3 +32,13 @@
     
 }
 
+.control{
+    display: flex;
+    flex-direction: row;
+}
+
+.footer{
+    align-items: center;
+    align-content: center;
+    text-align: center;
+}
